@@ -115,6 +115,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initializeVisitorCounter();
 
+  // Tether address copy functionality
+  const tetherIcon = document.getElementById('tether-icon');
+  const tetherAddress = 'YOUR_USDT_ADDRESS_HERE'; // Замените на ваш реальный адрес
+
+  if (tetherIcon) {
+    tetherIcon.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(tetherAddress);
+        
+        // Показать уведомление о копировании
+        const originalOpacity = tetherIcon.style.opacity;
+        tetherIcon.style.opacity = '0.5';
+        tetherIcon.style.filter = 'brightness(1.5) saturate(1.5)';
+        
+        setTimeout(() => {
+          tetherIcon.style.opacity = originalOpacity || '1';
+          tetherIcon.style.filter = '';
+        }, 1500);
+        
+      } catch (err) {
+        console.error('Failed to copy address:', err);
+        // Fallback для старых браузеров
+        const textArea = document.createElement('textarea');
+        textArea.value = tetherAddress;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        // Показать уведомление
+        const originalOpacity = tetherIcon.style.opacity;
+        tetherIcon.style.opacity = '0.5';
+        tetherIcon.style.filter = 'brightness(1.5) saturate(1.5)';
+        
+        setTimeout(() => {
+          tetherIcon.style.opacity = originalOpacity || '1';
+          tetherIcon.style.filter = '';
+        }, 1500);
+      }
+    });
+
+    tetherIcon.addEventListener('touchstart', async (e) => {
+      e.preventDefault();
+      tetherIcon.click();
+    });
+  }
+
 
   startScreen.addEventListener('click', () => {
     startScreen.classList.add('hidden');
