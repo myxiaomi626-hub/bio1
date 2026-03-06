@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tether address copy functionality
   const tetherIcon = document.getElementById('tether-icon');
-  const tetherAddress = 'YOUR_USDT_ADDRESS_HERE'; // Замените на ваш реальный адрес
+  const tetherAddress = 'TRnigJRtQA9X5gMXWs4bnNwuBZzsarfHiN'; // Замените на ваш реальный адрес
 
   if (tetherIcon) {
     tetherIcon.addEventListener('click', async () => {
